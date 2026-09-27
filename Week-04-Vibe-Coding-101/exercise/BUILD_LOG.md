@@ -58,3 +58,6 @@ Two sorted horizontal bars (50 vs 150) plus a slider for other floors. Rank by m
 - Q4 best movies with a floor: horizontal bar, sorted
 
 Q2 was switched from horizontal to vertical to match that decision. Q1, Q3, Q4 already matched.
+
+## Deploy layout (option B)
+Moved app.py to the repo root so Streamlit Cloud main file can be `app.py`. CSV still lives in `Week-04-Vibe-Coding-101/data/`.

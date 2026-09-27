@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "movie_ratings.csv"
+DATA_PATH = Path(__file__).resolve().parent / "Week-04-Vibe-Coding-101" / "data" / "movie_ratings.csv"
 
 st.title("MovieLens dashboard")
 st.write("Using `Week-04-Vibe-Coding-101/data/movie_ratings.csv`.")
