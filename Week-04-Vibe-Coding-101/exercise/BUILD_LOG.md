@@ -1,63 +1,63 @@
-# Week 4 Vibe Coding — build log (raw notes)
+# Week 4 Vibe Coding — build log (raw, not a writeup)
 
-## Prompt I gave
-Go step by step. First only load movie_ratings.csv in Streamlit and prove the file is readable.
+Where this lives: `Week-04-Vibe-Coding-101/exercise/BUILD_LOG.md`
+Do not lose this file. Next week’s report needs the real process, not memory.
 
-## What the AI produced
-A small app.py that reads ../data/movie_ratings.csv and shows row count, column names, and the first 10 rows. (An earlier full 4-chart version was pulled back so we could go one step at a time.)
+---
 
-## What I changed and why
-- Left the CSV in `data/` (copy of the course file)
-- Put the app in `exercise/`
-- Did not add charts yet
+## Moment 1 — Getting the data in
 
-## Prompt (Question 1 only)
-Answer Question 1 from the assignment using movie_ratings.csv: genre distribution among movies that were rated. Explain multi-genre handling first. Do not use a pie chart. Sort the bars. Stop after this one chart.
+**Prompt I gave (paraphrase of what I actually asked):**
+I had the MovieLens CSV on the course GitHub (`CUNYTechPrep/ds-dev-fall-2026` → `Week-04-Vibe-Coding-101/data/movie_ratings.csv`). I asked whether to move it or leave it in `data`. I also asked to make an `exercise` folder.
 
-## What the AI produced
-Horizontal bar chart of distinct rated movies per genre. Genres split on `|` then exploded. Count is movies, not ratings.
+**What the AI produced first:**
+Wanted to start writing the whole dashboard immediately. Also suggested copying the CSV into my own project because Streamlit Cloud cannot read the course repo.
 
-## What I changed and why
-- Did not add Questions 2–4 yet (going one question at a time)
-- Skipped pie chart because there are ~18 genres
+**What I changed and why:**
+- Left the original on the course GitHub. Copied CSV into my project: `Week-04-Vibe-Coding-101/data/movie_ratings.csv`.
+- Did not add an `exercise` folder on the course repo (I can’t / shouldn’t).
+- Told the AI to slow down after it generated all 4 charts at once.
 
-## Prompt (Question 2)
-Which genres have the highest average rating? Which have the lowest?
+---
 
-## What the AI produced
-Sorted horizontal bar of mean rating per genre after exploding `|`. Highest and lowest called out. Mean is over ratings, not over movies.
+## Moment 2 — The 4 questions / chart choices
 
-## What I changed and why
-- Still no Questions 3–4
-- Chose rating-level mean (every star a user gave) rather than averaging movie averages first
+**Prompt I gave:**
+The 4 assignment questions, one at a time. Then: “summarize each 4 questions because I need to make a decision which chart for each.” Then I picked from the toolkit table.
 
-## Prompt (Question 3)
-How has the mean rating changed across movie release years?
+**What the AI produced on the first try:**
+A full 4-chart Streamlit app in one shot (horizontal bars for Q1/Q2/Q4, line for Q3, plus a pie-chart warning for genres). I made it rewind to step-by-step.
 
-## What the AI produced
-Line chart of mean rating vs `year` (release year). Explicitly not `rating_year`. Missing years dropped.
+**What I changed and why (my chart decisions):**
+- Q1 Genre breakdown → horizontal bar, sorted. Not pie (18 genres).
+- Q2 Genre satisfaction → I changed this to a **vertical** bar, sorted. AI first used horizontal.
+- Q3 Ratings over time → line. Use `year` (release), not `rating_year`.
+- Q4 Best movies with a floor → horizontal bar, 50 vs 150 side by side + slider. I asked if Q4 could be a heatmap; I did **not** use heatmap (only one category + a ranking, not two categories).
 
-## What I changed and why
-- Still no Question 4
-- Y-axis 0–5 so the trend is not visually exaggerated
+**AI counting choices I left in (to judge later):**
+- Multi-genre: split `genres` on `|` then explode. A movie like Crime|Drama counts in both.
+- Q1 counts **movies**, not ratings.
+- Q2/Q3/Q4 mean = mean of **ratings**.
 
-## Prompt (Question 4)
-Top 5 best-rated movies with a floor of 50 ratings, then 150.
+---
 
-## What the AI produced
-Two sorted horizontal bars (50 vs 150) plus a slider for other floors. Rank by mean rating, then rating count.
+## Moment 3 — GitHub + Streamlit deploy
 
-## What I changed and why
-- Show 50 and 150 side by side so the “what changes” question is visible without guessing
-- Slider is the first interactive widget the assignment asked for
+**Prompt I gave:**
+Task 2 deploy. First time. Go slow. Then: root `app.py` (option B) vs nested path.
 
-## Chart decisions (Abel)
-- Q1 genre breakdown: horizontal bar, sorted
-- Q2 genre satisfaction: vertical bar, sorted
-- Q3 ratings over time: line (release year)
-- Q4 best movies with a floor: horizontal bar, sorted
+**What the AI produced:**
+Git init, commit, public repo `https://github.com/Csabel99/movielens-dashboard`, Streamlit Cloud from `main`.
 
-Q2 was switched from horizontal to vertical to match that decision. Q1, Q3, Q4 already matched.
+**What I changed and why:**
+- Chose option B: moved `app.py` to the **repo root** so the Streamlit “Main file path” can just be `app.py` like the handout.
+- CSV stayed in `Week-04-Vibe-Coding-101/data/`.
+- App is live; I can see all 4 questions and charts.
 
-## Deploy layout (option B)
-Moved app.py to the repo root so Streamlit Cloud main file can be `app.py`. CSV still lives in `Week-04-Vibe-Coding-101/data/`.
+---
+
+## Extra scraps (keep)
+
+- Cursor, not Codespaces. Streamlit Cloud only builds from GitHub.
+- Widgets: rating-count floor slider (assignment asked for 1–2).
+- Submission this week is the public Streamlit URL, not this log. This log is for NEXT week.
